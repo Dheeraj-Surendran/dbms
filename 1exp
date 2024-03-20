@@ -1,0 +1,182 @@
+
+mca30@LAB6:~$ mysql -u mca30 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.36-0ubuntu0.20.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE CollegeDB;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> USE CollegeDB;
+Database changed
+mysql> CREATE TABLE Student(roll_no INT PRIMARY KEY,name VARCHAR(255),dob DATE,address TEXT, phone_no VARCHAR(15),blood_grp VARCHAR(5));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE Course(Course_id INT,Course_name VARCHAR(255),Course_duration INT);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW TABLES;
++---------------------+
+| Tables_in_CollegeDB |
++---------------------+
+| Course              |
+| Student             |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE Student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| roll_no   | int          | NO   | PRI | NULL    |       |
+| name      | varchar(255) | YES  |     | NULL    |       |
+| dob       | date         | YES  |     | NULL    |       |
+| address   | text         | YES  |     | NULL    |       |
+| phone_no  | varchar(15)  | YES  |     | NULL    |       |
+| blood_grp | varchar(5)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Student DROP COLUMN blood_grp;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Student ADD Adar_no INT;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Student MODIFY COLUMN phone_no INT;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Student;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| roll_no  | int          | NO   | PRI | NULL    |       |
+| name     | varchar(255) | YES  |     | NULL    |       |
+| dob      | date         | YES  |     | NULL    |       |
+| address  | text         | YES  |     | NULL    |       |
+| phone_no | int          | YES  |     | NULL    |       |
+| Adar_no  | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> DROP TABLE Student,Course;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DROP DATABASE CollegeDB;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>      CREATE DATABSE OrganizationDB;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABSE OrganizationDB' at line 1
+mysql>      CREATE DATABASE OrganizationDB;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE OrganizationDB;
+Database changed
+mysql> CREATE TABLE Employee(emp_no VARCHAR(10),emp_name VARCHAR(255),dob DATE,address TEXT,mobile_no INT,dept_no VARCHAR(10),salary INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Department(dept_no VARCHAR(10),dept_name VARCHAR(255),location VARCHAR(255));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_OrganizationDB |
++--------------------------+
+| Department               |
+| Employee                 |
++--------------------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE Employee;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| emp_no    | varchar(10)  | YES  |     | NULL    |       |
+| emp_name  | varchar(255) | YES  |     | NULL    |       |
+| dob       | date         | YES  |     | NULL    |       |
+| address   | text         | YES  |     | NULL    |       |
+| mobile_no | int          | YES  |     | NULL    |       |
+| dept_no   | varchar(10)  | YES  |     | NULL    |       |
+| salary    | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Employee ADD PRIMARY KEY(emp_no);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Employee;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| emp_no    | varchar(10)  | NO   | PRI | NULL    |       |
+| emp_name  | varchar(255) | YES  |     | NULL    |       |
+| dob       | date         | YES  |     | NULL    |       |
+| address   | text         | YES  |     | NULL    |       |
+| mobile_no | int          | YES  |     | NULL    |       |
+| dept_no   | varchar(10)  | YES  |     | NULL    |       |
+| salary    | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> ALTER TABLE Department ADD PRIMARY KEY(dept_no);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Department;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| dept_no   | varchar(10)  | NO   | PRI | NULL    |       |
+| dept_name | varchar(255) | YES  |     | NULL    |       |
+| location  | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Employee ADD Designation VARCHAR(255);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Department DROP COLUMN location;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| emp_no      | varchar(10)  | NO   | PRI | NULL    |       |
+| emp_name    | varchar(255) | YES  |     | NULL    |       |
+| dob         | date         | YES  |     | NULL    |       |
+| address     | text         | YES  |     | NULL    |       |
+| mobile_no   | int          | YES  |     | NULL    |       |
+| dept_no     | varchar(10)  | YES  |     | NULL    |       |
+| salary      | int          | YES  |     | NULL    |       |
+| Designation | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> DESCRIBE Department;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| dept_no   | varchar(10)  | NO   | PRI | NULL    |       |
+| dept_name | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> 
+
+

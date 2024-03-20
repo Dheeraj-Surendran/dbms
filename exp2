@@ -1,0 +1,93 @@
+mysql> USE OrganizationDB;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> CREATE TABLE Persons(PersonID INT PRIMARY KEY,Name VARCHAR(155) NOT NULL,Aadhar INT UNIQUE NOT NULL,Age INT CHECK(Age>18));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Orders(OrderID INT PRIMARY KEY,OrderNumber INT NOT NULL,PersonID INT, FOREIGN KEY(PersonID) REFERENCES Persons(PersonID));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESCRIBE Persons;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| PersonID | int          | NO   | PRI | NULL    |       |
+| Name     | varchar(155) | NO   |     | NULL    |       |
+| Aadhar   | int          | NO   | UNI | NULL    |       |
+| Age      | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> DESCRIBE Orders;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| OrderID     | int  | NO   | PRI | NULL    |       |
+| OrderNumber | int  | NO   |     | NULL    |       |
+| PersonID    | int  | YES  | MUL | NULL    |       |
++-------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Employee ADD PRIMARY KEY(emp_no);
+mysql> DESCRIBE Employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| emp_no      | varchar(10)  | NO   | PRI | NULL    |       |
+| emp_name    | varchar(255) | YES  |     | NULL    |       |
+| dob         | date         | YES  |     | NULL    |       |
+| address     | text         | YES  |     | NULL    |       |
+| mobile_no   | int          | YES  |     | NULL    |       |
+| dept_no     | varchar(10)  | YES  |     | NULL    |       |
+| salary      | int          | YES  |     | NULL    |       |
+| Designation | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> DESCRIBE Department;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| dept_no   | varchar(10)  | NO   | PRI | NULL    |       |
+| dept_name | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Employee ADD CONSTRAINT fk_department FOREIGN KEY(dept_no) REFERENCES Department(dept_no) ON DELETE CASCADE;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Orders DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE Employee;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| emp_no      | varchar(10)  | NO   | PRI | NULL    |       |
+| emp_name    | varchar(255) | YES  |     | NULL    |       |
+| dob         | date         | YES  |     | NULL    |       |
+| address     | text         | YES  |     | NULL    |       |
+| mobile_no   | int          | YES  |     | NULL    |       |
+| dept_no     | varchar(10)  | YES  | MUL | NULL    |       |
+| salary      | int          | YES  |     | NULL    |       |
+| Designation | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> DESCRIBE Orders;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| OrderID     | int  | NO   |     | NULL    |       |
+| OrderNumber | int  | NO   |     | NULL    |       |
+| PersonID    | int  | YES  | MUL | NULL    |       |
++-------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> 
+
+
